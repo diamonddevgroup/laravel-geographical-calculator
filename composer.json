@@ -10,14 +10,14 @@
         }
     ],
     "require": {
-        "phpunit/phpunit": "^9.5|^10",
-        "friendsofphp/php-cs-fixer": "^3.0"
     },
     "prefer-stable": true,
     "require-dev": {
-        "orchestra/testbench": "^6.23"
+        "orchestra/testbench": "^9.0",
+        "phpunit/phpunit": "^9.5|^10|^11",
+        "friendsofphp/php-cs-fixer": "^3.0"
     },
-    "autoload" : {
+    "autoload": {
         "psr-4": {
             "KMLaravel\\GeographicalCalculator\\" : "src/",
             "KMLaravel\\GeographicalCalculator\\Tests\\" : "src/tests"
@@ -25,10 +25,13 @@
     },
     "scripts": {
         "test": "vendor/bin/phpunit",
-        "test-coverage": "phpunit --coverage-html coverage",
-        "format": "vendor/bin/php-cs-fixer fix --allow-risky=yes"
-    },
-    "autoload-dev": {
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage",
+        "sniff": [
+            "vendor/bin/php-cs-fixer fix -vvv --config=.php-cs-fixer.dist.php --dry-run --show-progress=dots"
+        ],
+        "lint": [
+            "vendor/bin/php-cs-fixer fix -vvv --config=.php-cs-fixer.dist.php --show-progress=dots"
+        ]
     },
     "extra" : {
       "laravel" : {
