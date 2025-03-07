@@ -1,25 +1,29 @@
 ![logo](assets/logo.png)
 
-
 ## Geographical Calculator
-[![License](https://poser.pugx.org/kmlaravel/apis-generator/license)](//packagist.org/packages/kmlaravel/laravel-geographical-calculator)
+
+[![License](https://poser.pugx.org/diamonddev/apis-generator/license)](//packagist.org/packages/diamonddev/laravel-geographical-calculator)
 [![PHP Composer](https://github.com/karam-mustafa/laravel-geographical-calculator/actions/workflows/php.yml/badge.svg)](https://github.com/karam-mustafa/laravel-geographical-calculator/actions/workflows/php.yml)
 [![Check & fix styling](https://github.com/karam-mustafa/laravel-geographical-calculator/actions/workflows/php-cs-fixer.yml/badge.svg)](https://github.com/karam-mustafa/laravel-geographical-calculator/actions/workflows/php-cs-fixer.yml)
 [![Run tests](https://github.com/karam-mustafa/laravel-geographical-calculator/actions/workflows/tests.yml/badge.svg)](https://github.com/karam-mustafa/laravel-geographical-calculator/actions/workflows/tests.yml)
 [![Code Quality](https://api.codiga.io/project/30429/score/svg)](https://api.codiga.io/project/30429/score/svg)
 
-Geographical Calculator was developed for laravel 5.8+ to help you to implement geographical calculation, 
+Geographical Calculator was developed for laravel 5.8+ to help you to implement geographical calculation,
 with With several algorithms that help you deal with coordinates.
 
 Installation
 ------------
+
 ##### 1 - Dependency
+
 The first step is using composer to install the package and automatically update your composer.json file, you can do this by running:
 
 ```shell
-composer require kmlaravel/laravel-geographical-calculator
+composer require diamonddev/laravel-geographical-calculator
 ```
+
 ##### 2 - Copy the package providers to your local config with the publish command, this will publish the config:
+
 ```shell
 
 php artisan geo:install
@@ -28,6 +32,7 @@ php artisan geo:install
 
 Features
 -----------
+
 - [Get the distance between one or more of points](https://github.com/karam-mustafa/laravel-geographical-calculator/blob/main/docs/distances.md#basic-usage)
 - [Get the center between set of points](https://github.com/karam-mustafa/laravel-geographical-calculator/blob/main/docs/areas.md#get-the-center-for-a-given-coordinates)
 - [Get the closest point to the specific point](https://github.com/karam-mustafa/laravel-geographical-calculator/blob/main/docs/ordering.md#get-closest-point)
@@ -36,11 +41,11 @@ Features
 - [Get a ranking of points by the nearest neighbor algorithm](https://github.com/karam-mustafa/laravel-geographical-calculator/blob/main/docs/ordering.md#get-ordering-points-by-nearest-neighbor-algorithm)
 - [Get all package features](https://github.com/karam-mustafa/laravel-geographical-calculator/blob/main/docs/all.md#all-features-in-one-function)
 
-
 config options
 ----------------
 > ## add your custom units,keys ..etc.
 >
+
 ```php
     /*
     |--------------------------------------------------------------------------
@@ -75,13 +80,13 @@ config options
 
 Changelog
 ---------
-Please see the [CHANGELOG](https://github.com/kmlaravel/laravel-geographical-calculator/blob/master/CHANGELOG.md) for more information about what has changed or updated or added recently.
+Please see the [CHANGELOG](https://github.com/diamonddev/laravel-geographical-calculator/blob/master/CHANGELOG.md) for more information about what has changed or updated or added recently.
 
 Security
 --------
-If you discover any security related issues, please email them first to karam2mustafa@gmail.com, 
-if we do not fix it within a short period of time please open a new issue describing your problem. 
+If you discover any security related issues, please email them first to karam2mustafa@gmail.com,
+if we do not fix it within a short period of time please open a new issue describing your problem.
 
 Credits
 -------
-[karam mustafa](https://www.linkedin.com/in/karam2mustafa)
+[Karam Mustafa](https://www.linkedin.com/in/karam2mustafa)

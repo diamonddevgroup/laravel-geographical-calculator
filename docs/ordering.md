@@ -1,7 +1,8 @@
 Get closest point
 ---------------
+
 ```php
-     $closest  = \KMLaravel\GeographicalCalculator\Facade\GeoFacade::setMainPoint([22, 37])
+     $closest  = \DiamondDev\GeographicalCalculator\Facade\GeoFacade::setMainPoint([22, 37])
             ->setPoints([
                 [22, 37],
                 [33, 40],
@@ -15,10 +16,12 @@ Get closest point
      //  the result will be array of [pointIndex => [lat , long]] that you inserted before.
      return $closest;
 ```
+
 Get farthest point
 ---------------
+
 ```php
-     $farthest  = \KMLaravel\GeographicalCalculator\Facade\GeoFacade::setMainPoint([22, 37])
+     $farthest  = \DiamondDev\GeographicalCalculator\Facade\GeoFacade::setMainPoint([22, 37])
             ->setPoints([
                 [22, 37],
                 [33, 40],
@@ -37,8 +40,9 @@ Get ordering points by nearest neighbor algorithm
 ---------------
 This algorithm can be explained as preparing the main point and searching for the closest point to it, then placing it in the second order,
 then the algorithm re-searching for the point closest to the second point and placing it in the third order, and so on...
+
 ```php
-     $getOrderByNearestNeighbor  = \KMLaravel\GeographicalCalculator\Facade\GeoFacade::setMainPoint([22, 37])
+     $getOrderByNearestNeighbor  = \DiamondDev\GeographicalCalculator\Facade\GeoFacade::setMainPoint([22, 37])
             ->setPoints([
                 [33, 45],
                 [31, 40],

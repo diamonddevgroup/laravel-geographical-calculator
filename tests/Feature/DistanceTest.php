@@ -1,19 +1,19 @@
 <?php
 
-namespace KMLaravel\GeographicalCalculator\Tests\Feature;
+namespace DiamondDev\GeographicalCalculator\Tests\Feature;
 
-use KMLaravel\GeographicalCalculator\Classes\Geo;
-use KMLaravel\GeographicalCalculator\Interfaces\GeoInterface;
+use DiamondDev\GeographicalCalculator\Classes\Geo;
+use DiamondDev\GeographicalCalculator\Interfaces\GeoInterface;
+use Exception;
 use Orchestra\Testbench\TestCase as OrchestraTestCase;
 
 class DistanceTest extends OrchestraTestCase
 {
     /**
-     * test if the distance equal the correct distance by given coordinate.
-     *
-     * @throws \Exception
+     * Test if the distance is correctly calculated for the given coordinates.
      *
      * @return void
+     * @throws Exception
      */
     public function test_distance_is_correct()
     {
@@ -23,16 +23,14 @@ class DistanceTest extends OrchestraTestCase
             ->getDistance();
 
         $this->assertEquals([
-            '1-2' => ['km' => 1258.1691302282],
+            '1-2' => ['km' => 1258.1691302281708],
         ], $result);
     }
 
     /**
-     * get clean instance of geo class.
+     * Get a clean instance of the Geo class.
      *
      * @return Geo|GeoInterface
-     *
-     * @author karam mustafa
      */
     public function newGeoInstance()
     {

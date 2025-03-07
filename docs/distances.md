@@ -1,8 +1,9 @@
 Basic usage:
 ----------
+
 ```php
     // Define your points
-    $distance =  \KMLaravel\GeographicalCalculator\Facade\GeoFacade::setPoint([22, 37])
+    $distance =  \DiamondDev\GeographicalCalculator\Facade\GeoFacade::setPoint([22, 37])
             // add your options, the default value for the unit is mile.
             ->setOptions(['units' => ['km']])
 
@@ -32,9 +33,10 @@ Basic usage:
 
 Options:
 ---------------
+
 ```php
     // If you set multiline units, the result will be each unit with the distance.
-     $distanceWithMultiUnits  = \KMLaravel\GeographicalCalculator\Facade\GeoFacade::setPoint([22, 37])
+     $distanceWithMultiUnits  = \DiamondDev\GeographicalCalculator\Facade\GeoFacade::setPoint([22, 37])
             ->setPoint([33, 40])
             // Set your units you want.
             ->setOptions(['units' => ['km' , 'mile' , 'm' , 'cm']])
@@ -42,12 +44,14 @@ Options:
     // the result will be [  "km" => 1258.1691302282, "mile" => 781.79005248609, "m" => 1258169.1302282, "cm" => 125816.91302282]
      return $distanceWithMultiUnits;
 ```
+
 All points at once:
 ---------------
+
 ```php
     // instead of calling setPoint each time
     // you can set your points at once.
-     $allPoints  = \KMLaravel\GeographicalCalculator\Facade\GeoFacade::setPoint([22, 37])
+     $allPoints  = \DiamondDev\GeographicalCalculator\Facade\GeoFacade::setPoint([22, 37])
             ->setPoints([
                 [22, 37],
                 [33, 40],
@@ -60,12 +64,14 @@ All points at once:
 
      return $allPoints;
 ```
+
 Callback functions
 ---------------
+
 ```php
      // You can see that sometimes it can be confusing to deal with the output,
      // so you can use callback in the getDistance function. 
-     $allPoints  = \KMLaravel\GeographicalCalculator\Facade\GeoFacade::setPoint([22, 37])
+     $allPoints  = \DiamondDev\GeographicalCalculator\Facade\GeoFacade::setPoint([22, 37])
             ->setPoints([
                 [22, 37],
                 [33, 40],
@@ -81,18 +87,20 @@ Callback functions
 
      return $allPoints;
 ```
+
 Use Multiple execution
 ---------------
 This package use the registry pattern and storage state to save all results,
 so if you want to use the geo class instance multiple time you should clear the previous results,
 and you can do that by calling `clearResult()` function.
+
 ```php
-     $exec1  = \KMLaravel\GeographicalCalculator\Facade\GeoFacade::setPoints([
+     $exec1  = \DiamondDev\GeographicalCalculator\Facade\GeoFacade::setPoints([
                 [22, 37],
                 [33, 40],
             ])
             ->getDistance();
-    $exec2  = \KMLaravel\GeographicalCalculator\Facade\GeoFacade::clearResult()->setPoints([
+    $exec2  = \DiamondDev\GeographicalCalculator\Facade\GeoFacade::clearResult()->setPoints([
                 [22, 37],
                 [33, 40],
             ])

@@ -1,21 +1,20 @@
 <?php
 
-namespace KMLaravel\GeographicalCalculator\Traits;
+namespace DiamondDev\GeographicalCalculator\Traits;
 
 trait DiametersStorage
 {
     /**
-     * diameter in meter.
-     *
-     * @author karam mustafa
+     * Diameter in meters.
      *
      * @var int
      */
-    public $diameter = 0;
+    public int $diameter = 0;
 
     /**
-     * @return int
-     * @author karam mustafa
+     * Get the diameter in meters.
+     *
+     * @return int The diameter in meters.
      */
     public function getDiameter()
     {
@@ -23,14 +22,13 @@ trait DiametersStorage
     }
 
     /**
-     * diameter in kilo meter
+     * /**
+     * Set the diameter in meters.
      *
-     * @param  int  $diameter
-     *
-     * @return DiametersStorage
-     * @author karam mustafa
+     * @param int $diameter The diameter in meters.
+     * @return DiametersStorage The current instance for method chaining.
      */
-    public function setDiameter($diameter = 0)
+    public function setDiameter(int $diameter = 0)
     {
         $this->diameter = $diameter;
 

@@ -4,9 +4,9 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | units values
+    | units
     |--------------------------------------------------------------------------
-    | your custom units, the initial units its convert from mile to any value.
+    | Your custom units, the initial units its convert from mile to any value.
     |
     */
     'units' => [
@@ -21,7 +21,7 @@ return [
     |--------------------------------------------------------------------------
     | distance_key_prefix
     |--------------------------------------------------------------------------
-    | if you declared more than tow points to resolve their distance,
+    | If you declared more than tow points to resolve their distance,
     | you will see the result in the following format:
     | "1-2" => ["km" => "some result"],
     | "2-3" => ["km" => "some result"],

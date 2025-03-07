@@ -1,40 +1,47 @@
 {
-    "name": "kmlaravel/laravel-geographical-calculator",
-    "description": "laravel package help you to implement geographical calculation, with With several algorithms that help you deal with coordinates",
+    "name": "diamonddev/laravel-geographical-calculator",
+    "description": "Laravel package that helps you perform geographical calculation, with several algorithms that help you deal with coordinates",
     "license": "MIT",
     "authors": [
         {
-            "name": "Karam mustafa",
-            "email": "karam2mustafa@gmail.com",
-            "homepage": "https://github.com/karam-mustafa"
+            "name": "Diamond Dev Group",
+            "email": "support@diamonddev.group",
+            "homepage": "https://github.com/diamonddevgroup/laravel-geographical-calculator"
         }
     ],
     "require": {
-        "phpunit/phpunit": "^9.5|^10",
-        "friendsofphp/php-cs-fixer": "^3.0"
     },
     "prefer-stable": true,
     "require-dev": {
-        "orchestra/testbench": "^6.23"
+        "orchestra/testbench": "^9.0",
+        "phpunit/phpunit": "^9.5|^10|^11",
+        "friendsofphp/php-cs-fixer": "^3.0"
     },
-    "autoload" : {
+    "autoload": {
         "psr-4": {
-            "KMLaravel\\GeographicalCalculator\\" : "src/",
-            "KMLaravel\\GeographicalCalculator\\Tests\\" : "src/tests"
+            "DiamondDev\\GeographicalCalculator\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "DiamondDev\\GeographicalCalculator\\Tests\\": "tests"
         }
     },
     "scripts": {
         "test": "vendor/bin/phpunit",
-        "test-coverage": "phpunit --coverage-html coverage",
-        "format": "vendor/bin/php-cs-fixer fix --allow-risky=yes"
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage",
+        "sniff": [
+            "vendor/bin/php-cs-fixer fix -vvv --config=.php-cs-fixer.dist.php --dry-run --show-progress=dots"
+        ],
+        "lint": [
+            "vendor/bin/php-cs-fixer fix -vvv --config=.php-cs-fixer.dist.php --show-progress=dots"
+        ]
     },
-    "autoload-dev": {
-    },
-    "extra" : {
-      "laravel" : {
-          "providers" : [
-              "KMLaravel\\GeographicalCalculator\\Providers\\GeoServiceProviders"
-          ]
-      }
+    "extra": {
+        "laravel": {
+            "providers": [
+                "DiamondDev\\GeographicalCalculator\\Providers\\GeoServiceProviders"
+            ]
+        }
     }
 }

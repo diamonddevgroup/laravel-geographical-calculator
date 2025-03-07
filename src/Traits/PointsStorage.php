@@ -1,47 +1,39 @@
 <?php
 
-namespace KMLaravel\GeographicalCalculator\Traits;
+namespace DiamondDev\GeographicalCalculator\Traits;
 
 trait PointsStorage
 {
     /**
-     * all the points to handle the selected requirement.
-     *
-     * @author karam mustafa
+     * All the points to handle the selected requirement.
      *
      * @var array
      */
-    public $points = [];
+    public array $points = [];
 
     /**
-     * Main point that used to compare the closest points to the specific point.
-     *
-     * @author karam mustafa
+     * Main point used to compare the closest points to a specific point.
      *
      * @var array
      */
-    public $mainPoint = [];
+    public array $mainPoint = [];
 
     /**
-     * @param null $index
+     * Get all points or a specific point by index.
      *
-     * @return array
-     *
-     * @author karam mustaf
+     * @param int|null $index The index of the point to retrieve. If null, all points are returned.
+     * @return array The points array or a specific point.
      */
-    public function getPoints($index = null)
+    public function getPoints(int $index = null)
     {
-        return isset($this->points[$index])
-            ? $this->points[$index]
-            : $this->points;
+        return $this->points[$index] ?? $this->points;
     }
 
     /**
-     * @param $point
+     * Add a new point to the points array.
      *
-     * @return PointsStorage
-     *
-     * @author karam mustaf
+     * @param array $point The point to add.
+     * @return PointsStorage The current instance for method chaining.
      */
     public function setPoint($point)
     {
@@ -51,14 +43,13 @@ trait PointsStorage
     }
 
     /**
-     * @param int           $indexAt
-     * @param null|callable $callback
+     * Update a specific point by index using a callback function.
      *
-     * @return PointsStorage
-     *
-     * @author karam mustaf
+     * @param int $indexAt            The index of the point to update.
+     * @param callable|null $callback The callback function to apply to the point.
+     * @return PointsStorage The current instance for method chaining.
      */
-    public function updatePoint($indexAt = 0, $callback = null)
+    public function updatePoint(int $indexAt = 0, callable $callback = null)
     {
         $this->points[$indexAt] = $callback($this->points[$indexAt]);
 
@@ -66,9 +57,9 @@ trait PointsStorage
     }
 
     /**
-     * @return array
+     * Get the main point.
      *
-     * @author karam mustaf
+     * @return array The main point.
      */
     public function getMainPoint()
     {
@@ -76,13 +67,12 @@ trait PointsStorage
     }
 
     /**
-     * @param $point
+     * Set the main point.
      *
-     * @return PointsStorage
-     *
-     * @author karam mustaf
+     * @param array $point The main point to set.
+     * @return PointsStorage The current instance for method chaining.
      */
-    public function setMainPoint($point)
+    public function setMainPoint(array $point)
     {
         $this->mainPoint = $point;
 
@@ -90,13 +80,12 @@ trait PointsStorage
     }
 
     /**
-     * @param array $points
+     * Set multiple points at once.
      *
-     * @return PointsStorage
-     *
-     * @author karam mustaf
+     * @param array $points The points to set.
+     * @return PointsStorage The current instance for method chaining.
      */
-    public function setPoints($points)
+    public function setPoints(array $points)
     {
         $this->points = array_merge($this->points, $points);
 
@@ -104,13 +93,12 @@ trait PointsStorage
     }
 
     /**
-     * @param array $points
+     * Replace all existing points with a new set of points.
      *
-     * @return PointsStorage
-     *
-     * @author karam mustaf
+     * @param array $points The new points to set.
+     * @return PointsStorage The current instance for method chaining.
      */
-    public function replacePoints($points)
+    public function replacePoints(array $points)
     {
         $this->points = $points;
 
@@ -118,11 +106,9 @@ trait PointsStorage
     }
 
     /**
-     * clear all stored points.
+     * Clear all stored points.
      *
-     * @return PointsStorage
-     *
-     * @author karam mustaf
+     * @return PointsStorage The current instance for method chaining.
      */
     public function clearPoints()
     {

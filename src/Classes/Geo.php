@@ -1,18 +1,20 @@
 <?php
 
-namespace KMLaravel\GeographicalCalculator\Classes;
+namespace DiamondDev\GeographicalCalculator\Classes;
 
-use KMLaravel\GeographicalCalculator\Abstracts\AbstractGeo;
-use KMLaravel\GeographicalCalculator\Interfaces\GeoInterface;
-use KMLaravel\GeographicalCalculator\Traits\Areas;
-use KMLaravel\GeographicalCalculator\Traits\Distances;
-use KMLaravel\GeographicalCalculator\Traits\GeoTraitContainer;
-use KMLaravel\GeographicalCalculator\Traits\Ordering;
+use DiamondDev\GeographicalCalculator\Abstracts\AbstractGeo;
+use DiamondDev\GeographicalCalculator\Interfaces\GeoInterface;
+use DiamondDev\GeographicalCalculator\Traits\Areas;
+use DiamondDev\GeographicalCalculator\Traits\Distances;
+use DiamondDev\GeographicalCalculator\Traits\GeoTraitContainer;
+use DiamondDev\GeographicalCalculator\Traits\Ordering;
+use Exception;
 
 /**
  * Class Geo.
  *
- * @author karam mustafa
+ * This class provides geographical calculations such as distance and center point calculations.
+ * It uses various traits to extend its functionality.
  */
 class Geo extends AbstractGeo implements GeoInterface
 {
@@ -22,13 +24,15 @@ class Geo extends AbstractGeo implements GeoInterface
     use Ordering;
 
     /**
-     * @inheritDoc
+     * Clear the results stored in the class.
+     *
+     * This method checks if the class has a property called `result` and clears various
+     * stored results and points if it exists.
+     *
+     * @return $this
      */
     public function clearResult()
     {
-        // At this time, the Distances trait use the storage,
-        // so we check if there is any property called result,
-        // we will empty these results.
         if (property_exists(__CLASS__, 'result')) {
             $this->clearStorage();
             $this->clearPoints();
@@ -40,12 +44,18 @@ class Geo extends AbstractGeo implements GeoInterface
     }
 
     /**
-     * @inheritDoc
+     * Execute all available features and store their results.
+     *
+     * This method runs each feature, stores its result, and then clears the result to
+     * prepare for the next feature.
+     * Finally, it returns the combined results.
+     *
+     * @param callable|null $callback Optional callback function to execute after each feature.
+     * @return array The combined results of all features.
+     * @throws Exception
      */
-    public function allFeatures($callback = null)
+    public function allFeatures(callable $callback = null)
     {
-        // Implement each available feature and store this feature to storage,
-        // then clear the result to implement another feature until we finish all the features.
         $this->setInStorage('distanceResult', $this->getDistance())
             ->clearStoredResults()
             ->setInStorage('centerResult', $this->getCenter())

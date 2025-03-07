@@ -1,3 +1,10 @@
+## v2.3.0 - 2024-09-02
+
+- Added compatibility with Laravel 11
+- Added cache files to the .gitignore
+- Migrated phpunit.xml
+- Moved dev dependencies from require to required-dev in composer.json
+
 ## v2.2.0 - 2022-02-08
 
 - Added the farthest point from a set of points to a custom point.

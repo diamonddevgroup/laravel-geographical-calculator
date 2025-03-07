@@ -1,17 +1,19 @@
 <?php
 
-namespace KMLaravel\GeographicalCalculator\Tests\Feature;
+namespace DiamondDev\GeographicalCalculator\Tests\Feature;
 
-use KMLaravel\GeographicalCalculator\Classes\Geo;
-use KMLaravel\GeographicalCalculator\Interfaces\GeoInterface;
+use DiamondDev\GeographicalCalculator\Classes\Geo;
+use DiamondDev\GeographicalCalculator\Interfaces\GeoInterface;
+use Exception;
 use Orchestra\Testbench\TestCase as OrchestraTestCase;
 
 class AllFeaturesTest extends OrchestraTestCase
 {
     /**
-     * @throws \Exception
+     * Test the retrieval of all features (distance and center) for given coordinates.
      *
      * @return void
+     * @throws Exception
      */
     public function test_get_all_feature()
     {
@@ -40,11 +42,9 @@ class AllFeaturesTest extends OrchestraTestCase
     }
 
     /**
-     * get clean instance of geo class.
+     * Get a clean instance of the Geo class.
      *
      * @return Geo|GeoInterface
-     *
-     * @author karam mustafa
      */
     public function newGeoInstance()
     {

@@ -1,27 +1,27 @@
 <?php
 
-namespace KMLaravel\GeographicalCalculator\Interfaces;
+namespace DiamondDev\GeographicalCalculator\Interfaces;
 
 interface GeoInterface
 {
     /**
      * @param array $point
      *
-     * @author karam mustafa
+     * @author Karam Mustafa
      */
     public function setPoint($point);
 
     /**
      * Finding the distance of points using several given coordinate points.
      *
-     * @author karam mustafa
+     * @author Karam Mustafa
      */
     public function getDistance();
 
     /**
      * Finding the center of points using several given coordinate points.
      *
-     * @author karam mustafa
+     * @author Karam Mustafa
      */
     public function getCenter();
 
@@ -30,7 +30,7 @@ interface GeoInterface
      *
      * @return GeoInterface
      *
-     * @author karam mustafa
+     * @author Karam Mustafa
      */
     public function clearResult();
 
@@ -39,7 +39,7 @@ interface GeoInterface
      *
      * @return array
      *
-     * @author karam mustafa
+     * @author Karam Mustafa
      */
     public function allFeatures();
 }

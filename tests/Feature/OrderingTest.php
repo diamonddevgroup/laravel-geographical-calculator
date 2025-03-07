@@ -1,17 +1,19 @@
 <?php
 
-namespace KMLaravel\GeographicalCalculator\Tests\Feature;
+namespace DiamondDev\GeographicalCalculator\Tests\Feature;
 
-use KMLaravel\GeographicalCalculator\Classes\Geo;
-use KMLaravel\GeographicalCalculator\Interfaces\GeoInterface;
+use DiamondDev\GeographicalCalculator\Classes\Geo;
+use DiamondDev\GeographicalCalculator\Interfaces\GeoInterface;
+use Exception;
 use Orchestra\Testbench\TestCase as OrchestraTestCase;
 
 class OrderingTest extends OrchestraTestCase
 {
     /**
-     * @throws \Exception
+     * Test the closest point of a set of points.
      *
      * @return void
+     * @throws Exception
      */
     public function test_closest_point_of_set_points()
     {
@@ -22,7 +24,7 @@ class OrderingTest extends OrchestraTestCase
             ->getClosest();
 
         $this->assertEquals([
-            // the key is the index of points insertion.
+            // The key is the index of points insertion.
             1 => [
                 40.92918,
                 14.44339,
@@ -34,7 +36,8 @@ class OrderingTest extends OrchestraTestCase
             ->setPoint([40.92918, 14.44339])
             ->setPoint([40.92945, 14.44301])
             ->getClosest();
-        // now the closest point index should be 2
+
+        // Now the closest point index should be 0.
         $this->assertEquals([
             0 => [
                 40.92918,
@@ -44,9 +47,10 @@ class OrderingTest extends OrchestraTestCase
     }
 
     /**
-     * @throws \Exception
+     * Test the farthest point of a set of points.
      *
      * @return void
+     * @throws Exception
      */
     public function test_farthest_point_of_set_points()
     {
@@ -57,7 +61,7 @@ class OrderingTest extends OrchestraTestCase
             ->getFarthest();
 
         $this->assertEquals([
-            // the key is the index of points insertion.
+            // The key is the index of points insertion.
             0 => [
                 40.92945,
                 14.44301,
@@ -69,7 +73,8 @@ class OrderingTest extends OrchestraTestCase
             ->setPoint([40.92918, 14.44339])
             ->setPoint([40.92945, 14.44301])
             ->getFarthest();
-        // now the closest point index should be 1
+
+        // Now the farthest point index should be 1.
         $this->assertEquals([
             1 => [
                 40.92945,
@@ -79,9 +84,10 @@ class OrderingTest extends OrchestraTestCase
     }
 
     /**
-     * @throws \Exception
+     * Test the order of points using the nearest neighbor algorithm.
      *
      * @return void
+     * @throws Exception
      */
     public function test_order_by_nearest_neighbor_algorithm()
     {
@@ -90,15 +96,15 @@ class OrderingTest extends OrchestraTestCase
             ->setPoint([40.92945, 14.44301])
             ->setPoint([40.92918, 14.44339])
             ->getOrderByNearestNeighbor();
-        // this data already ordered.
-        // so we depend on the returned keys to test the results.
+
+        // This data is already ordered, so we depend on the returned keys to test the results.
         $this->assertEquals([
             [0, 1, 2],
         ], [collect($result)->keys()->toArray()]);
 
-        // now we will re implement the same points
-        // We will arrange the points in a slightly different order
-        // and the order of the points should remain in the correct order
+        // Re-implement the same points.
+        // Arrange the points in a slightly different order.
+        // The order of the points should remain correct.
 
         $result = $this->newGeoInstance()
             ->setMainPoint([40.9171863, 14.1632638])
@@ -112,11 +118,11 @@ class OrderingTest extends OrchestraTestCase
     }
 
     /**
-     * get clean instance of geo class.
+     * Get a clean instance of the Geo class.
      *
      * @return Geo|GeoInterface
      *
-     * @author karam mustafa
+     * @author Karam Mustafa
      */
     public function newGeoInstance()
     {
