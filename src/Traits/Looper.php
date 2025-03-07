@@ -1,20 +1,20 @@
 <?php
 
-namespace KMLaravel\GeographicalCalculator\Traits;
+namespace DiamondDev\GeographicalCalculator\Traits;
 
 trait Looper
 {
     /**
-     * map through each item in data, and apply the inserted callback.
+     * Iterate through each item in the provided data and apply the given callback function.
      *
-     * @param $data
-     * @param callable $callback
+     * @param array $data        The data to iterate over.
+     * @param callable $callback The callback function to apply to each item. The callback receives two parameters: the index and the item.
      *
      * @return void
      *
-     * @author karam mustafa
+     * @author Karam Mustafa
      */
-    public function through($data, $callback)
+    public function through(array $data, callable $callback)
     {
         foreach ($data as $index => $item) {
             $callback($index, $item);

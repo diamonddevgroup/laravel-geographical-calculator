@@ -1,12 +1,12 @@
 {
-    "name": "kmlaravel/laravel-geographical-calculator",
-    "description": "laravel package help you to implement geographical calculation, with With several algorithms that help you deal with coordinates",
+    "name": "diamonddev/laravel-geographical-calculator",
+    "description": "Laravel package that helps you perform geographical calculation, with several algorithms that help you deal with coordinates",
     "license": "MIT",
     "authors": [
         {
-            "name": "Karam mustafa",
-            "email": "karam2mustafa@gmail.com",
-            "homepage": "https://github.com/karam-mustafa"
+            "name": "Diamond Dev Group",
+            "email": "support@diamonddev.group",
+            "homepage": "https://github.com/diamonddevgroup/laravel-geographical-calculator"
         }
     ],
     "require": {
@@ -19,8 +19,12 @@
     },
     "autoload": {
         "psr-4": {
-            "KMLaravel\\GeographicalCalculator\\" : "src/",
-            "KMLaravel\\GeographicalCalculator\\Tests\\" : "src/tests"
+            "DiamondDev\\GeographicalCalculator\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "DiamondDev\\GeographicalCalculator\\Tests\\": "tests"
         }
     },
     "scripts": {
@@ -33,11 +37,11 @@
             "vendor/bin/php-cs-fixer fix -vvv --config=.php-cs-fixer.dist.php --show-progress=dots"
         ]
     },
-    "extra" : {
-      "laravel" : {
-          "providers" : [
-              "KMLaravel\\GeographicalCalculator\\Providers\\GeoServiceProviders"
-          ]
-      }
+    "extra": {
+        "laravel": {
+            "providers": [
+                "DiamondDev\\GeographicalCalculator\\Providers\\GeoServiceProviders"
+            ]
+        }
     }
 }

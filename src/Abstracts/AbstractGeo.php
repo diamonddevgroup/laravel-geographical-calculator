@@ -1,28 +1,31 @@
 <?php
 
-namespace KMLaravel\GeographicalCalculator\Abstracts;
+namespace DiamondDev\GeographicalCalculator\Abstracts;
 
 /**
- * Class AbstractGeo.
+ * Abstract class AbstractGeo.
  *
- * @author karam mustafa
+ * This class provides a base implementation for geographical calculations.
+ * It includes a method to conditionally execute a callback function.
+ *
+ * @author  Karam Mustafa
  */
 abstract class AbstractGeo
 {
     /**
-     * @param mixed         $condition
-     * @param null|callable $callback
+     * Conditionally execute a callback function.
      *
-     * @return AbstractGeo
+     * This method checks if a condition is set, and if so, executes the provided callback function.
+     * If the condition or callback is not set, it returns the current instance.
      *
-     * @author karam mustaf
+     * @param mixed $condition        The condition to check.
+     * @param callable|null $callback The callback function to execute if the condition is met.
+     * @return AbstractGeo The current instance of the class.
      */
-    public function checkIf($condition, $callback = null)
+    public function checkIf(mixed $condition, callable $callback = null)
     {
-        if (isset($condition)) {
-            if (isset($callback)) {
-                return $callback();
-            }
+        if (isset($condition) && isset($callback)) {
+            return $callback();
         }
 
         return $this;

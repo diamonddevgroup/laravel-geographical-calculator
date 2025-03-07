@@ -1,63 +1,54 @@
 <?php
 
-namespace KMLaravel\GeographicalCalculator\Traits;
+namespace DiamondDev\GeographicalCalculator\Traits;
 
 /**
  * Trait DataStorage.
  *
- * @author karam mustafa
+ * This trait provides methods to store, retrieve, and manipulate data within a class.
+ * It includes functionalities for managing options, results, and a custom local storage.
+ *
+ * @author  Karam Mustafa
  */
 trait DataStorage
 {
     /**
-     * this property save any key with his value in a custom key.
-     * if we want to store something instead of declare a variable and pass it as parameter
-     * in any function, we use this property as a public property to share the data in classes.
-     *
-     * @author karam mustafa
+     * Stores key-value pairs for sharing data across methods and classes.
      *
      * @var array
      */
-    private $localStorage = [];
+    private array $localStorage = [];
     /**
-     * results.
-     *
-     * @author karam mustafa
+     * Stores the results of various operations.
      *
      * @var array
      */
-    private $result = [];
+    private array $result = [];
     /**
-     * for develop and resolve any options.
-     *
-     * @author karam mustafa
+     * Stores options for configuring various operations.
      *
      * @var array
      */
-    private $options = [];
+    private array $options = [];
 
     /**
-     * @param mixed $key
+     * Retrieves the options array or a specific option by key.
      *
-     * @return array
-     *
-     * @author karam mustaf
+     * @param mixed|null $key The key of the option to retrieve.
+     * @return array The options array or the specific option.
      */
-    public function getOptions($key = null)
+    public function getOptions(mixed $key = null)
     {
-        return isset($this->options[$key])
-            ? $this->options[$key]
-            : $this->options;
+        return $this->options[$key] ?? $this->options;
     }
 
     /**
-     * @param array $options
+     * Sets the options array.
      *
-     * @return DataStorage
-     *
-     * @author karam mustaf
+     * @param array $options The options to set.
+     * @return DataStorage The current instance for method chaining.
      */
-    public function setOptions($options)
+    public function setOptions(array $options)
     {
         $this->options = $options;
 
@@ -65,13 +56,12 @@ trait DataStorage
     }
 
     /**
-     * @param null|callable $callback
+     * Retrieves the result array, optionally processed by a callback.
      *
-     * @return mixed
-     *
-     * @author karam mustaf
+     * @param callable|null $callback Optional callback to process the result.
+     * @return mixed The result array or the processed result.
      */
-    public function getResult($callback = null)
+    public function getResult(callable $callback = null)
     {
         return isset($callback)
             ? $callback(collect($this->result))
@@ -79,27 +69,23 @@ trait DataStorage
     }
 
     /**
-     * @param null|string $key
+     * Retrieves a specific result by key or the entire result array.
      *
-     * @return mixed
-     *
-     * @author karam mustaf
+     * @param string|null $key The key of the result to retrieve.
+     * @return mixed The specific result or the entire result array.
      */
-    public function getResultByKey($key = null)
+    public function getResultByKey(string $key = null)
     {
-        return isset($this->result[$key])
-            ? $this->result[$key]
-            : $this->result;
+        return $this->result[$key] ?? $this->result;
     }
 
     /**
-     * @param mixed $result
+     * Merges new results into the existing result array.
      *
-     * @return DataStorage
-     *
-     * @author karam mustaf
+     * @param mixed $result The result to merge.
+     * @return DataStorage The current instance for method chaining.
      */
-    public function setResult($result)
+    public function setResult(mixed $result)
     {
         $this->result = array_merge($this->result, $result);
 
@@ -107,16 +93,15 @@ trait DataStorage
     }
 
     /**
-     * @param string $key
-     * @param mixed  $value
+     * Appends a value to an array stored under a specific key in the local storage.
      *
-     * @return DataStorage
-     *
-     * @author karam mustaf
+     * @param string $key  The key under which the value is stored.
+     * @param mixed $value The value to append.
+     * @return DataStorage The current instance for method chaining.
      */
-    public function appendToStorage($key, $value)
+    public function appendToStorage(string $key, mixed $value)
     {
-        if (! isset($this->localStorage[$key])) {
+        if (!isset($this->localStorage[$key])) {
             $this->localStorage[$key] = [];
         }
 
@@ -126,9 +111,9 @@ trait DataStorage
     }
 
     /**
-     * @return DataStorage
+     * Clears all stored results.
      *
-     * @author karam mustaf
+     * @return DataStorage The current instance for method chaining.
      */
     public function clearStoredResults()
     {
@@ -138,46 +123,39 @@ trait DataStorage
     }
 
     /**
-     * @param string $key
+     * Retrieves a value from the local storage by key or the entire local storage array.
      *
-     * @return mixed
-     *
-     * @author karam mustaf
+     * @param mixed|null $key The key of the value to retrieve.
+     * @return mixed The value associated with the key or the entire local storage array.
      */
-    public function getFromStorage($key = null)
+    public function getFromStorage(mixed $key = null)
     {
         if (is_array($key)) {
             return $this->getCustomKeysFromStorage($key);
         }
 
-        return isset($this->localStorage[$key])
-            ? $this->localStorage[$key]
-            : $this->localStorage;
+        return $this->localStorage[$key] ?? $this->localStorage;
     }
 
     /**
-     * @param string $key
+     * Checks if a specific key exists in the local storage.
      *
-     * @return mixed
-     *
-     * @author karam mustaf
+     * @param mixed|null $key The key to check.
+     * @return bool True if the key exists, false otherwise.
      */
-    public function inStorage($key = null)
+    public function inStorage(mixed $key = null)
     {
         return isset($this->localStorage[$key]);
     }
 
     /**
-     * if the key int getFromStorage is array, then we get each key from the storage
-     * this mean the user want a specific keys from storage.
+     * /**
+     * Retrieves specific keys from the local storage.
      *
-     * @param array $keys
-     *
-     * @return array
-     *
-     * @author karam mustafa
+     * @param array $keys The keys to retrieve.
+     * @return array An array of key-value pairs from the local storage.
      */
-    public function getCustomKeysFromStorage($keys)
+    public function getCustomKeysFromStorage(array $keys)
     {
         $result = [];
 
@@ -189,14 +167,14 @@ trait DataStorage
     }
 
     /**
-     * @param string $key
-     * @param mixed  $value
+     * /**
+     * Sets a value in the local storage under a specific key.
      *
-     * @return DataStorage
-     *
-     * @author karam mustaf
+     * @param string $key  The key under which the value is stored.
+     * @param mixed $value The value to store.
+     * @return DataStorage The current instance for method chaining.
      */
-    public function setInStorage($key, $value)
+    public function setInStorage(string $key, mixed $value)
     {
         $this->localStorage[$key] = $value;
 
@@ -204,9 +182,9 @@ trait DataStorage
     }
 
     /**
-     * @return DataStorage
+     * Clears all data from the local storage.
      *
-     * @author karam mustaf
+     * @return DataStorage The current instance for method chaining.
      */
     public function clearStorage()
     {
@@ -216,11 +194,10 @@ trait DataStorage
     }
 
     /**
-     * @param mixed $keys
+     * Removes specific keys from the local storage.
      *
-     * @return DataStorage
-     *
-     * @author karam mustaf
+     * @param mixed $keys The keys to remove.
+     * @return DataStorage The current instance for method chaining.
      */
     public function removeFromStorage(...$keys)
     {
@@ -234,17 +211,13 @@ trait DataStorage
     }
 
     /**
-     * check if there is a callback, then inject the result in it.
-     * else basically return the result.
+     * Resolves the result by optionally processing it with a callback.
      *
-     * @param mixed         $result
-     * @param null|callable $callback
-     *
-     * @return mixed
-     *
-     * @author karam mustafa
+     * @param mixed $result           The result to process.
+     * @param callable|null $callback Optional callback to process the result.
+     * @return mixed The processed result or the original result.
      */
-    private function resolveCallbackResult($result, $callback)
+    private function resolveCallbackResult(mixed $result, ?callable $callback)
     {
         return isset($callback)
             ? $callback(collect($result))

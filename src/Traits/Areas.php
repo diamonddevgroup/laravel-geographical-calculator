@@ -1,39 +1,42 @@
 <?php
 
-namespace KMLaravel\GeographicalCalculator\Traits;
+namespace DiamondDev\GeographicalCalculator\Traits;
 
 use Illuminate\Support\Collection;
 
 trait Areas
 {
     /**
-     * get the center from a given data.
+     * Get the center from the given data points.
      *
-     * @param null|callable $callback
+     * This method calculates the geographical center (centroid) of the provided points.
+     * It stores intermediate values in the storage and returns the final result.
      *
-     * @return array|bool|\Illuminate\Support\Collection
+     * @param callable|null $callback Optional callback to process the result.
      *
-     * @author karam mustafa
+     * @return array|bool|Collection The calculated center as an array or a Collection if a callback is provided.
+     *                               Returns false if no points are provided.
      */
-    public function getCenter($callback = null)
+    public function getCenter(callable $callback = null)
     {
-
-        // set points count in the storage.
+        // Set the number of points in the storage.
         $this->setInStorage('pointsCount', count($this->getPoints()));
 
-        // check if there are points or not.
-        if (! $this->getFromStorage('pointsCount')) {
+        // Check if there are any points.
+        if (!$this->getFromStorage('pointsCount')) {
             return false;
         }
 
-        // reset all dimensions values.
+        // Reset all dimension values.
         $this->resetDimensions();
-        // loop through each point and add the lat and long to each dimension.
+
+        // Loop through each point and add the latitude and longitude to each dimension.
         $this->through($this->getPoints(), function ($index, $point) {
-            // set lat and long
+            // Convert latitude and longitude to radians and store them.
             $this->setInStorage('lat', ($point[0] * pi() / 180));
             $this->setInStorage('long', ($point[1] * pi() / 180));
-            // set dimensions
+
+            // Update dimension values.
             $this->setInStorage(
                 'x',
                 (
@@ -55,47 +58,42 @@ trait Areas
             );
         });
 
-        // divide each dimension to all point count.
+        // Divide each dimension by the number of points.
         $this->resolveDimensionByPointsCount()
-            // set final lat and long
+            // Calculate the final latitude and longitude.
             ->resolveCoordinates()
-            // register this lat and long in results,
-            // so we can access this result from any next execution,
-            // if we have multi process or tasks in future.
+            // Store the result for future access.
             ->setResult([
                 'lat' => $this->getFromStorage('lat') * 180 / pi(),
                 'long' => $this->getFromStorage('long') * 180 / pi(),
             ]);
 
+        // Return the result, optionally processed by a callback.
         return isset($callback)
             ? collect($callback($this->getResult()))
             : $this->getResult();
     }
 
     /**
-     * check if the point is in area that created depending on the main point and the diameter.
+     * Check if a point is within an area defined by a main point and a diameter.
      *
-     * @return true
+     * This method calculates the distance between the main point and the point to be checked.
+     * If the distance is greater than the given diameter, the point is outside the area.
+     * Otherwise, the point is within the area.
      *
-     * @author karam mustafa
+     * @return bool True if the point is within the area, false otherwise.
      */
     public function isInArea()
     {
-        // store the points in different
+        // Store the main point and the point to calculate the area.
         $this->setInStorage('mainPointToCheck', $this->getMainPoint());
         $this->setInStorage('pointToCalculateArea', $this->getPoints()[0]);
-        // clear the points and reset them
+
+        // Clear and reset the points.
         $this->clearPoints();
         $this->setPoints([$this->getFromStorage('mainPointToCheck'), $this->getFromStorage('pointToCalculateArea')]);
 
-        // now this is the hard part, we must calculate the distance
-        // between the main point and the point that you want to check it.
-
-        // if the distance between these points is bigger than the given diameter
-        // then this mean the point is not within the area
-
-        // otherwise mean that the distance between the given point is locate in the circle that calculated
-        // from the main point and the diameter
+        // Calculate the distance between the main point and the point to be checked.
         $this->setInStorage(
             'distanceToCompare',
             $this->setOptions(['units' => ['km']])->getDistance(function (Collection $item) {
@@ -103,15 +101,16 @@ trait Areas
             })
         );
 
+        // Return true if the distance is greater than the diameter, false otherwise.
         return $this->getFromStorage('distanceToCompare') > $this->getDiameter();
     }
 
     /**
-     * reset all dimension values.
+     * Reset all dimension values to their initial state.
      *
-     * @return Areas
+     * This method sets the x, y, and z dimensions to 0.0 and stores them in the storage.
      *
-     * @author karam mustafa
+     * @return Areas The current instance for method chaining.
      */
     public function resetDimensions()
     {
@@ -124,12 +123,11 @@ trait Areas
     }
 
     /**
-     * get dimensions and loop for each one
-     * divide dimension value by points count.
+     * Divide each dimension value by the number of points.
      *
-     * @return Areas
+     * This method loops through each dimension and divides its value by the number of points.
      *
-     * @author karam mustafa
+     * @return Areas The current instance for method chaining.
      */
     private function resolveDimensionByPointsCount()
     {
@@ -144,11 +142,11 @@ trait Areas
     }
 
     /**
-     * set final lat and long values.
+     * Calculate the final latitude and longitude values.
      *
-     * @return Areas
+     * This method calculates the final latitude and longitude values based on the stored dimensions.
      *
-     * @author karam mustafa
+     * @return Areas The current instance for method chaining.
      */
     private function resolveCoordinates()
     {

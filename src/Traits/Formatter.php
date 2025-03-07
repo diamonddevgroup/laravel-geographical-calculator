@@ -1,20 +1,22 @@
 <?php
 
-namespace KMLaravel\GeographicalCalculator\Traits;
+namespace DiamondDev\GeographicalCalculator\Traits;
 
 trait Formatter
 {
     /**
-     * @param string $key
+     * Format the distance key with a prefix from the configuration.
      *
-     * @return float
+     * @param string $key The key to format.
      *
-     * @author karam mustafa
+     * @return string The formatted distance key.
+     *
+     * @author Karam Mustafa
      */
-    private function formatDistanceKey($key)
+    private function formatDistanceKey(string $key)
     {
         $prefix = config('geographical_calculator.distance_key_prefix');
 
-        return $prefix.$key;
+        return $prefix . $key;
     }
 }

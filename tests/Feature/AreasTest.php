@@ -1,19 +1,19 @@
 <?php
 
-namespace KMLaravel\GeographicalCalculator\Tests\Feature;
+namespace DiamondDev\GeographicalCalculator\Tests\Feature;
 
-use KMLaravel\GeographicalCalculator\Classes\Geo;
-use KMLaravel\GeographicalCalculator\Interfaces\GeoInterface;
+use DiamondDev\GeographicalCalculator\Classes\Geo;
+use DiamondDev\GeographicalCalculator\Interfaces\GeoInterface;
+use Exception;
 use Orchestra\Testbench\TestCase as OrchestraTestCase;
 
 class AreasTest extends OrchestraTestCase
 {
     /**
-     * test if the center equal the correct center by given coordinates.
-     *
-     * @throws \Exception
+     * Test if the center is correctly calculated for the given coordinates.
      *
      * @return void
+     * @throws Exception
      */
     public function test_center()
     {
@@ -22,22 +22,20 @@ class AreasTest extends OrchestraTestCase
             ->getCenter();
 
         $this->assertEquals([
-            'lat' => 27.508023496931,
-            'long' => 38.424795502212,
+            'lat' => 27.508023496931166,
+            'long' => 38.424795502212234,
         ], $result);
     }
 
     /**
-     * test if the given point is in custom area, depending on main point and diameter
-     *
-     * @throws \Exception
+     * Test if a given point is within a custom area, based on the main point and diameter.
      *
      * @return void
+     * @throws Exception
      */
     public function test_if_given_point_is_in_custom_area()
     {
-
-        // the result must be true
+        // The result must be true
         $result = $this->newGeoInstance()->setMainPoint([22, 37])
             ->setDiameter(1000)
             ->setPoint([33, 40])
@@ -45,7 +43,7 @@ class AreasTest extends OrchestraTestCase
 
         $this->assertTrue($result);
 
-        // the result must be false
+        // The result must be false
         $result = $this->newGeoInstance()->setMainPoint([22, 37])
             ->setDiameter(2000)
             ->setPoint([33, 40])
@@ -55,11 +53,11 @@ class AreasTest extends OrchestraTestCase
     }
 
     /**
-     * get clean instance of geo class.
+     * Get a clean instance of the Geo class.
      *
      * @return Geo|GeoInterface
      *
-     * @author karam mustafa
+     * @author Karam Mustafa
      */
     public function newGeoInstance()
     {

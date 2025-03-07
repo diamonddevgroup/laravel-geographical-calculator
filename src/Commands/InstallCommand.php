@@ -1,12 +1,12 @@
 <?php
 
-namespace KMLaravel\GeographicalCalculator\Commands;
+namespace DiamondDev\GeographicalCalculator\Commands;
 
 use Illuminate\Console\Command;
 
 class InstallCommand extends Command
 {
-    public $packageLink = 'https://github.com/karam-mustafa/laravel-geographical-calculator';
+    public string $packageLink = 'https://github.com/karam-mustafa/laravel-geographical-calculator';
 
     /**
      * The name and signature of the console command.
@@ -23,23 +23,13 @@ class InstallCommand extends Command
     protected $description = 'install all laravel-geographical-calculator package dependencies';
 
     /**
-     * Create a new command instance.
+     * Execute the console command.
      *
      * @return void
      */
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
-    /**
-     * Execute the console command.
-     *
-     * @return mixed
-     */
     public function handle()
     {
-        system('php artisan vendor:publish --provider="KMLaravel\GeographicalCalculator\Providers\GeographicalCalculatorServiceProviders"');
+        system('php artisan vendor:publish --provider="DiamondDev\GeographicalCalculator\Providers\GeographicalCalculatorServiceProviders"');
         system('php artisan  vendor:publish --tag=geographical-calculator-config');
 
         $this->info('<info> Install the dependencies was succeed</info>');

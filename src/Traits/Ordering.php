@@ -1,30 +1,36 @@
 <?php
 
-namespace KMLaravel\GeographicalCalculator\Traits;
+namespace DiamondDev\GeographicalCalculator\Traits;
+
+use Exception;
 
 trait Ordering
 {
     /**
-     * @author karam mustafa
+     * An array to keep track of points that have been appended before.
      *
      * @var array
      */
-    private $pointsAppendedBefore = [];
+    private array $pointsAppendedBefore = [];
 
     /**
-     * get the closest point to the main point.
+     * Get the closest point to the main point.
      *
-     * @param null|callable $callback
+     * This method calculates the distance from the main point to each point,
+     * determines the closest point, and optionally applies a callback function
+     * to the result.
      *
-     * @return mixed
+     * @param callable|null $callback An optional callback function to apply to the result.
      *
-     * @author karam mustafa
+     * @return mixed The closest point to the main point, optionally processed by the callback.
+     *
+     * @throws Exception If there is an error during the distance calculation process.
      */
-    public function getClosest($callback = null)
+    public function getClosest(callable $callback = null)
     {
         $this->resolveEachDistanceToMainPoint();
 
-        // set the closest point index after we sort the distances result.
+        // Set the closest point index after sorting the distances result.
         $this->setInStorage(
             'closestPointIndex',
             collect($this->getFromStorage('distancesEachPointToMainPoint'))->sort()->keys()->first()
@@ -40,25 +46,30 @@ trait Ordering
     }
 
     /**
-     * get the farthest point to the main point.
+     * Get the farthest point from the main point.
      *
-     * @param  null|callable  $callback
+     * This method calculates the distance from the main point to each point,
+     * determines the farthest point, and optionally applies a callback function
+     * to the result.
      *
-     * @return mixed
-     * @author karam mustafa
+     * @param callable|null $callback An optional callback function to apply to the result.
+     *
+     * @return mixed The farthest point from the main point, optionally processed by the callback.
+     *
+     * @throws Exception If there is an error during the distance calculation process.
      */
-    public function getFarthest($callback = null)
+    public function getFarthest(callable $callback = null)
     {
         $this->resolveEachDistanceToMainPoint();
 
-        // set the closest point index after we sort the distances result.
+        // Set the farthest point index after sorting the distance result in descending order.
         $this->setInStorage(
             'farthestPointIndex',
             collect($this->getFromStorage('distancesEachPointToMainPoint'))->sortDesc()->keys()->first()
         );
 
         $this->setResult([
-            "farthest" => [
+            'farthest' => [
                 $this->getFromStorage('farthestPointIndex') => $this->getFromStorage('points')[$this->getFromStorage('farthestPointIndex')],
             ],
         ]);
@@ -67,18 +78,18 @@ trait Ordering
     }
 
     /**
-     * Add the key to each point, and use the Nearest Neighbor Algorithm to resolve the order of the data.
+     * Add a key to each point and use the Nearest Neighbor Algorithm to determine the order of the points.
      *
-     * @return mixed
+     * @return mixed The ordered points based on the Nearest Neighbor Algorithm.
      *
-     * @author karam mustafa
+     * @throws Exception If there is an error during the distance calculation process.
      */
     public function getOrderByNearestNeighbor()
     {
-        // get each point and update it to add a key.
+        // Add a key to each point.
         $this->resolveKeyForEachPoint();
 
-        // append main point as a first point in points array.
+        // Append the main point as the first point in the points array.
         $this->replacePoints(array_merge([
             [$this->getMainPoint()[0], $this->getMainPoint()[1], 'key' => 0],
         ], $this->getPoints()));
@@ -87,71 +98,64 @@ trait Ordering
     }
 
     /**
-     * get the closest point to the main point.
+     * Get the closest point to the main point using the Nearest Neighbor Algorithm.
      *
-     * @param $points
-     * @param array  $result
-     * @param int    $sizeOfPoints
-     * @param string $key
+     * This method iterates through the provided points to find the closest point to the main point.
+     * It uses the Nearest Neighbor Algorithm to determine the order of the points.
      *
-     * @return mixed
+     * @param mixed $points     The array of points to process.
+     * @param array $result     The array to store the result. Defaults to an empty array.
+     * @param int $sizeOfPoints The total number of points. Defaults to 0.
+     * @param string $key       The key to identify each point. Defaults to 'key'.
      *
-     * @author karam mustafa
+     * @return mixed The ordered points based on the Nearest Neighbor Algorithm.
+     *
+     * @throws Exception If there is an error during the distance calculation process.
+     *
+     * @author Karam Mustafa
      */
-    public function nearestNeighborAlgorithm($points, $result = [], $sizeOfPoints = 0, $key = 'key')
+    public function nearestNeighborAlgorithm(mixed $points, array $result = [], int $sizeOfPoints = 0, string $key = 'key')
     {
         $res = $result;
 
-        // if the res variable have a zero size,
-        // this mean we are now in the main point,
-        // so we will append the first point in the res array.
-        if (sizeof($res) == 0) {
+        // If the result array is empty, append the first point (main point) to it.
+        if (empty($res)) {
             $res[0] = collect($points)->first();
 
-            // push this key to the keys were we visited before.
-            array_push($this->pointsAppendedBefore, 0);
+            // Mark the main point as visited.
+            $this->pointsAppendedBefore[] = 0;
         }
 
-        // If all points were visited,
-        // we return the final result.
-        if (sizeof($res) == $sizeOfPoints) {
+        // If all points have been visited, return the final result.
+        if (count($res) == $sizeOfPoints) {
             return $res;
         }
 
-        // if there are not points we return the array
-        // that contains only the main points with distance 0.
-        if (sizeof($points) == 0) {
+        // If there are no points, return the result array containing only the main point.
+        if (!count($points)) {
             return $res;
         }
 
-        // We will compare the values with the diameter of the Earth,
-        // because no distance can be greater than this number.
+        // Initialize the distance with a value greater than the Earth's diameter.
         $distance = 64800 * 2;
 
-        // The point closest to the last point in the array of variable res,
-        // among the other set of points
+        // Variable to store the key of the closest point.
         $pointKeyToPush = '';
 
-        // get the last point.
+        // Get the last point in the result array.
         $lastPoint = $res[array_key_last($res)];
 
-        // now we will go through each point,
-        // and we will calculate the current point with the last point,
-        // and get the closest point into the last point in res array.
-        // if it find any point we keep looking at all the points until we reach the closest point.
-        foreach ($points as $pointKey => $point) {
-
-            // clear all stored results and point
-            // that keep us able to keep the result is clean
+        // Iterate through each point to find the closest point to the last point in the result array.
+        foreach ($points as $point) {
+            // Clear all stored results to ensure clean calculations.
             $this->clearResult();
 
-            // check if we dont calculate the point distance with itself.
+            // Skip the calculation if the point is the same as the last point.
             if ($point[$key] == $lastPoint[$key]) {
                 continue;
             }
 
-            // calculate the last point that we want to find the closest point to it
-            // with the current point iteration.
+            // Calculate the distance between the last point and the current point.
             $distanceCalc = $this->setPoints([
                 [$lastPoint[0], $lastPoint[1]],
                 [$point[0], $point[1]],
@@ -159,34 +163,32 @@ trait Ordering
                 return $point->first()['km'];
             });
 
-            // if the calculation result is lower than the last distance value
-            // this mean we are finding now point that closest than the previous results.
+            // If the calculated distance is less than the previous distance, update the closest point.
             if ($distanceCalc < $distance) {
                 $distance = $distanceCalc;
 
-                $pointKeyToPush = $points[$pointKey][$key];
+                $pointKeyToPush = $point[$key];
             }
         }
 
-        // if we have only one point,
-        // then we push this point.
-        if (sizeof($points) == 1) {
+        // If there is only one point, set it as the closest point.
+        if (count($points) == 1) {
             $pointKeyToPush = collect($points)->first()[$key];
         }
 
-        // Now we append this point to the result array.
+        // Append the closest point to the result array.
         $res[$pointKeyToPush] = $points[collect($points)->where($key, $pointKeyToPush)->keys()[0]];
 
-        // and mark this point as a visited point
-        array_push($this->pointsAppendedBefore, $pointKeyToPush);
+        // Mark the closest point as visited.
+        $this->pointsAppendedBefore[] = $pointKeyToPush;
 
-        // assign the calculated distance to it.
+        // Assign the calculated distance to it.
         // $res[$pointKeyToPush]['distance'] = $distance;
 
         // Get the new points array without the visited points.
         $points = collect($points)->whereNotIn($key, $this->pointsAppendedBefore);
 
-        // re call the previous implementation, until we visit all points.
+        // Recursively call the algorithm until all points are visited.
         return $this->nearestNeighborAlgorithm($points, $res, $sizeOfPoints, $key);
     }
 
@@ -195,7 +197,7 @@ trait Ordering
      *
      * @return void
      *
-     * @author karam mustafa
+     * @author Karam Mustafa
      */
     private function resolveKeyForEachPoint()
     {

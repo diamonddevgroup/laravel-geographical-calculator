@@ -1,9 +1,9 @@
 <?php
 
-namespace KMLaravel\GeographicalCalculator\Facade;
+namespace DiamondDev\GeographicalCalculator\Facade;
 
+use DiamondDev\GeographicalCalculator\Classes\Geo;
 use Illuminate\Support\Facades\Facade;
-use KMLaravel\GeographicalCalculator\Classes\Geo;
 
 /**
  * @method Geo setPoint(array $point)

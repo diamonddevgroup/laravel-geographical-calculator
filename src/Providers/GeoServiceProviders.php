@@ -1,10 +1,10 @@
 <?php
 
-namespace KMLaravel\GeographicalCalculator\Providers;
+namespace DiamondDev\GeographicalCalculator\Providers;
 
+use DiamondDev\GeographicalCalculator\Classes\Geo;
+use DiamondDev\GeographicalCalculator\Commands\InstallCommand;
 use Illuminate\Support\ServiceProvider;
-use KMLaravel\GeographicalCalculator\Classes\Geo;
-use KMLaravel\GeographicalCalculator\Commands\InstallCommand;
 
 class GeoServiceProviders extends ServiceProvider
 {
@@ -15,9 +15,7 @@ class GeoServiceProviders extends ServiceProvider
         $this->resolveCommands();
     }
 
-    public function register()
-    {
-    }
+    public function register() {}
 
     /**
      * register facades dependence's.
@@ -30,19 +28,19 @@ class GeoServiceProviders extends ServiceProvider
     }
 
     /**
-     * @desc publish files
+     * @desc   publish files
      *
-     * @author karam mustafa
+     * @author Karam Mustafa
      */
     protected function publishesPackages()
     {
         $this->publishes([
-            __DIR__.'/../Config/geographical_calculator.php' => config_path('geographical_calculator.php'),
+            __DIR__ . '/../Config/geographical_calculator.php' => config_path('geographical_calculator.php'),
         ], 'geographical-calculator-config');
     }
 
     /**
-     * @author karam mustafa
+     * @author Karam Mustafa
      */
     private function resolveCommands()
     {

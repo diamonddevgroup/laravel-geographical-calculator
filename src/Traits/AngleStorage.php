@@ -1,36 +1,38 @@
 <?php
 
-namespace KMLaravel\GeographicalCalculator\Traits;
+namespace DiamondDev\GeographicalCalculator\Traits;
 
 trait AngleStorage
 {
     /**
-     * @author karam mustafa
+     * @author Karam Mustafa
      *
      * @var array
      */
-    private $longs = [];
+    private array $longs = [];
+
     /**
      * sin value.
      *
-     * @author karam mustafa
+     * @author Karam Mustafa
      *
-     * @var float|int
+     * @var int|float|string
      */
-    private $sin;
+    private int|float|string $sin;
+
     /**
      * cos value.
      *
-     * @author karam mustafa
+     * @author Karam Mustafa
      *
-     * @var float|int
+     * @var int|float|string
      */
-    private $cos;
+    private int|float|string $cos;
 
     /**
-     * @return float|int
+     * @return int|float|string
      *
-     * @author karam mustaf
+     * @author Karam Mustafa
      */
     public function getSin()
     {
@@ -38,13 +40,13 @@ trait AngleStorage
     }
 
     /**
-     * @param float|int $sin
+     * @param int|float|string $sin
      *
      * @return AngleStorage
      *
-     * @author karam mustaf
+     * @author Karam Mustafa
      */
-    public function setSin($sin)
+    public function setSin(int|float|string $sin)
     {
         $this->sin = $sin;
 
@@ -52,9 +54,9 @@ trait AngleStorage
     }
 
     /**
-     * @return float|int
+     * @return int|float|string
      *
-     * @author karam mustaf
+     * @author Karam Mustafa
      */
     public function getCos()
     {
@@ -62,9 +64,9 @@ trait AngleStorage
     }
 
     /**
-     * @return mixed
+     * @return array
      *
-     * @author karam mustaf
+     * @author Karam Mustafa
      */
     public function getLongs()
     {
@@ -76,7 +78,7 @@ trait AngleStorage
      *
      * @return AngleStorage
      *
-     * @author karam mustaf
+     * @author Karam Mustafa
      */
     public function setLongitude($val)
     {
@@ -86,13 +88,13 @@ trait AngleStorage
     }
 
     /**
-     * @param float|int $cos
+     * @param int|float|string $cos
      *
      * @return AngleStorage
      *
-     * @author karam mustaf
+     * @author Karam Mustafa
      */
-    public function setCos($cos)
+    public function setCos(int|float|string $cos)
     {
         $this->cos = $cos;
 
@@ -102,7 +104,7 @@ trait AngleStorage
     /**
      * clear all stored angles.
      *
-     * @author karam mustafa
+     * @author Karam Mustafa
      */
     public function clearAngles()
     {
@@ -114,7 +116,7 @@ trait AngleStorage
     /**
      * clear Longs.
      *
-     * @author karam mustafa
+     * @author Karam Mustafa
      */
     private function clearLongs()
     {
