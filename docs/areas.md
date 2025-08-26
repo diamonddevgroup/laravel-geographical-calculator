@@ -11,7 +11,7 @@ Get the center for a given coordinates
 
             // get the calculated center between these points.
             ->getCenter();
-            // the result should be array contains lat value and long value
+            // the result should be an array that contains lat value and long value
     return $center;
 ```
 
@@ -19,8 +19,7 @@ All points at once
 ---------------
 
 ```php
-    // instead of calling setPoint each time
-    // you can set your points at once.
+    // instead of calling setPoint each time, you can set your points at once.
      $center  = \DiamondDev\GeographicalCalculator\Facade\GeoFacade::setPoints([
                 [22, 37],
                 [33, 40],
@@ -29,7 +28,7 @@ All points at once
             // and of course, you still can use getPoint again if you want.
             ->setPoint([33, 40])
             ->getCenter();
-            // the result should be array contains lat value and long value
+            // the result should be an array that contains lat value and long value
 
      return $center;
 ```
@@ -66,7 +65,7 @@ Callback functions
                 // you can do what you want on the result.
                 return $result->first();
             });
-            // the result should be array contains lat value and long value
+            // the result should be an array that contains lat value and long value
 
      return $center;
 ```

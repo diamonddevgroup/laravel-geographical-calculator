@@ -13,19 +13,19 @@ Basic usage:
             ->setPoint([33, 40])
 
             // get the calculated distance.
-            // lets suppose you added 6 points
+            // let's suppose you added 6 points
             // this package will return the distance between a first and a second point.
             // a second and a third point.
             // a third and a fourth point and so on.
-            // each result will returned  with the index of each point.
+            // each result will return with the index of each point.
             // and you can specify the prefix before the key of each returned,
-            // by change the distance_key_prefix key from a config class.
-            // for example, the first and second point you add will shown like this:
+            // by changing the distance_key_prefix key from a config class.
+            // for example, the first and second point you add will show like this:
             // "1-2" => ["km" => 1258.1691302282]
-            // the second and third point you add will shown like this:
+            // the second and third point you add will show like this:
             // "2-3" => ["km" => 1258.1691302282]
             //  and so on.
-            // you can use callback, the callback is return Collection instance of result.
+            // you can use callback, the callback will return a Collection instance of the result.
             ->getDistance();
 
     return $distance;
@@ -49,8 +49,7 @@ All points at once:
 ---------------
 
 ```php
-    // instead of calling setPoint each time
-    // you can set your points at once.
+    // instead of calling setPoint each time, you can set your points at once.
      $allPoints  = \DiamondDev\GeographicalCalculator\Facade\GeoFacade::setPoint([22, 37])
             ->setPoints([
                 [22, 37],
@@ -59,7 +58,7 @@ All points at once:
             ])
             // and of course, you still can use getPoint again if you want.
             ->setPoint([33, 40])
-            // you can use callback, the callback is return Collection instance of result.
+            // you can use callback, the callback will return a Collection instance of the result.
             ->getDistance();
 
      return $allPoints;
