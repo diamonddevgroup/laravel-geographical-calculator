@@ -6,7 +6,7 @@ use Illuminate\Console\Command;
 
 class InstallCommand extends Command
 {
-    public string $packageLink = 'https://github.com/karam-mustafa/laravel-geographical-calculator';
+    public string $packageLink = 'https://github.com/diamonddev/laravel-geographical-calculator';
 
     /**
      * The name and signature of the console command.

@@ -4,10 +4,16 @@ namespace DiamondDev\GeographicalCalculator\Classes;
 
 use DiamondDev\GeographicalCalculator\Abstracts\AbstractGeo;
 use DiamondDev\GeographicalCalculator\Interfaces\GeoInterface;
+use DiamondDev\GeographicalCalculator\Traits\AngleStorage;
 use DiamondDev\GeographicalCalculator\Traits\Areas;
+use DiamondDev\GeographicalCalculator\Traits\DataStorage;
+use DiamondDev\GeographicalCalculator\Traits\Debugger;
+use DiamondDev\GeographicalCalculator\Traits\DiametersStorage;
 use DiamondDev\GeographicalCalculator\Traits\Distances;
-use DiamondDev\GeographicalCalculator\Traits\GeoTraitContainer;
+use DiamondDev\GeographicalCalculator\Traits\Formatter;
+use DiamondDev\GeographicalCalculator\Traits\Looper;
 use DiamondDev\GeographicalCalculator\Traits\Ordering;
+use DiamondDev\GeographicalCalculator\Traits\PointsStorage;
 use Exception;
 
 /**
@@ -18,7 +24,13 @@ use Exception;
  */
 class Geo extends AbstractGeo implements GeoInterface
 {
-    use GeoTraitContainer;
+    use DataStorage;
+    use PointsStorage;
+    use AngleStorage;
+    use DiametersStorage;
+    use Formatter;
+    use Debugger;
+    use Looper;
     use Areas;
     use Distances;
     use Ordering;

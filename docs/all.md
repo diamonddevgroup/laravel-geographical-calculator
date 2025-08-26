@@ -13,7 +13,7 @@ For now, only center and distance supported in this function.
             // ->setPoint([lat, long])
             ->setPoint([33, 40])
             ->allFeatures();
-    // the result will be array contains ['distance' => '...' , 'center' => '...']
-    // each output was described in docs files.
+    // the result will be an array contains ['distance' => '...' , 'center' => '...']
+    // each output was described in the doc files.
     return $allFeature;
 ```
