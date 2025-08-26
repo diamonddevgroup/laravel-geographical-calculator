@@ -1,3 +1,11 @@
+## v2.4.0 - 2025-08-26
+
+### What's Changed
+
+* Laravel 12.x support by @diamondobama in https://github.com/diamonddevgroup/laravel-geographical-calculator/pull/2
+
+**Full Changelog**: https://github.com/diamonddevgroup/laravel-geographical-calculator/compare/v2.3.0...v2.4.0
+
 ## v2.3.0 - 2024-09-02
 
 - Added compatibility with Laravel 11
