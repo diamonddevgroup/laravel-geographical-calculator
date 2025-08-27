@@ -2,8 +2,18 @@
 
 namespace DiamondDev\GeographicalCalculator\Traits;
 
+use Exception;
 use Illuminate\Support\Collection;
 
+/**
+ * Trait Areas.
+ *
+ * This trait provides methods to calculate areas and center points.
+ * It includes methods to calculate the center of a set of points,
+ * check if a point is within an area, and reset all dimensions.
+ *
+ * @author Diamond Mubaarak
+ */
 trait Areas
 {
     /**
@@ -82,6 +92,8 @@ trait Areas
      * Otherwise, the point is within the area.
      *
      * @return bool True if the point is within the area, false otherwise.
+     *
+     * @throws Exception
      */
     public function isInArea()
     {
@@ -110,7 +122,7 @@ trait Areas
      *
      * This method sets the x, y, and z dimensions to 0.0 and stores them in the storage.
      *
-     * @return Areas The current instance for method chaining.
+     * @return $this The current instance for method chaining.
      */
     public function resetDimensions()
     {
@@ -127,7 +139,7 @@ trait Areas
      *
      * This method loops through each dimension and divides its value by the number of points.
      *
-     * @return Areas The current instance for method chaining.
+     * @return $this The current instance for method chaining.
      */
     private function resolveDimensionByPointsCount()
     {
@@ -146,7 +158,7 @@ trait Areas
      *
      * This method calculates the final latitude and longitude values based on the stored dimensions.
      *
-     * @return Areas The current instance for method chaining.
+     * @return $this The current instance for method chaining.
      */
     private function resolveCoordinates()
     {

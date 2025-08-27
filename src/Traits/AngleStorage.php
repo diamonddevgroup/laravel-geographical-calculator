@@ -2,6 +2,14 @@
 
 namespace DiamondDev\GeographicalCalculator\Traits;
 
+/**
+ * Trait AngleStorage.
+ *
+ * This trait provides methods to store and retrieve angles.
+ * It includes methods to set and get the sine and cosine values and to clear all stored angles.
+ *
+ * @author Diamond Mubaarak
+ */
 trait AngleStorage
 {
     /**
@@ -42,7 +50,7 @@ trait AngleStorage
     /**
      * @param int|float|string $sin
      *
-     * @return AngleStorage
+     * @return $this
      *
      * @author Karam Mustafa
      */
@@ -76,7 +84,7 @@ trait AngleStorage
     /**
      * @param $val
      *
-     * @return AngleStorage
+     * @return $this
      *
      * @author Karam Mustafa
      */
@@ -90,7 +98,7 @@ trait AngleStorage
     /**
      * @param int|float|string $cos
      *
-     * @return AngleStorage
+     * @return $this
      *
      * @author Karam Mustafa
      */

@@ -9,7 +9,7 @@ interface GeoInterface
      *
      * @author Karam Mustafa
      */
-    public function setPoint($point);
+    public function setPoint(array $point);
 
     /**
      * Finding the distance of points using several given coordinate points.
