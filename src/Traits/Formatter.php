@@ -2,6 +2,13 @@
 
 namespace DiamondDev\GeographicalCalculator\Traits;
 
+/**
+ * Trait Formatter.
+ *
+ * This trait provides a method to format a distance key with a prefix from the configuration.
+ *
+ * @author Karam Mustafa
+ */
 trait Formatter
 {
     /**

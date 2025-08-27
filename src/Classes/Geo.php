@@ -21,6 +21,8 @@ use Exception;
  *
  * This class provides geographical calculations such as distance and center point calculations.
  * It uses various traits to extend its functionality.
+ *
+ * @author Diamond Mubaarak
  */
 class Geo extends AbstractGeo implements GeoInterface
 {
@@ -63,7 +65,9 @@ class Geo extends AbstractGeo implements GeoInterface
      * Finally, it returns the combined results.
      *
      * @param callable|null $callback Optional callback function to execute after each feature.
+     *
      * @return array The combined results of all features.
+     *
      * @throws Exception
      */
     public function allFeatures(callable $callback = null)

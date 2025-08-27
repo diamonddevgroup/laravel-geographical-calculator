@@ -13,6 +13,7 @@ class AllFeaturesTest extends OrchestraTestCase
      * Test the retrieval of all features (distance and center) for given coordinates.
      *
      * @return void
+     *
      * @throws Exception
      */
     public function test_get_all_feature()

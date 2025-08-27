@@ -13,6 +13,7 @@ class OrderingTest extends OrchestraTestCase
      * Test the closest point of a set of points.
      *
      * @return void
+     *
      * @throws Exception
      */
     public function test_closest_point_of_set_points()
@@ -50,6 +51,7 @@ class OrderingTest extends OrchestraTestCase
      * Test the farthest point of a set of points.
      *
      * @return void
+     *
      * @throws Exception
      */
     public function test_farthest_point_of_set_points()
@@ -87,6 +89,7 @@ class OrderingTest extends OrchestraTestCase
      * Test the order of points using the nearest neighbor algorithm.
      *
      * @return void
+     *
      * @throws Exception
      */
     public function test_order_by_nearest_neighbor_algorithm()

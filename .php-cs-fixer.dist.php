@@ -4,15 +4,40 @@ use PhpCsFixer\Config;
 use PhpCsFixer\Finder;
 
 $rules = [
-    'array_syntax' => ['syntax' => 'short'],
+    'array_syntax' => [
+        'syntax' => 'short',
+    ],
     'binary_operator_spaces' => [
         'default' => 'single_space',
-        'operators' => ['=>' => null],
+        'operators' => [
+            '=>' => null,
+        ],
     ],
     'blank_line_after_namespace' => true,
     'blank_line_after_opening_tag' => true,
     'blank_line_before_statement' => [
-        'statements' => ['return'],
+        'statements' => [
+            'continue',
+            'declare',
+            'do',
+            'exit',
+            'for',
+            'foreach',
+            'goto',
+            'if',
+            'include',
+            'include_once',
+            'phpdoc',
+            'require',
+            'require_once',
+            'return',
+            'switch',
+            'throw',
+            'try',
+            'while',
+            'yield',
+            'yield_from',
+        ],
     ],
     'control_structure_braces' => false,
     'cast_spaces' => true,
@@ -110,7 +135,9 @@ $rules = [
     'single_import_per_statement' => true,
     'single_line_after_imports' => true,
     'single_line_comment_style' => [
-        'comment_types' => ['hash'],
+        'comment_types' => [
+            'hash',
+        ],
     ],
     'single_quote' => true,
     'space_after_semicolon' => true,
@@ -122,7 +149,10 @@ $rules = [
     'trim_array_spaces' => true,
     'unary_operator_spaces' => true,
     'visibility_required' => [
-        'elements' => ['method', 'property'],
+        'elements' => [
+            'method',
+            'property',
+        ],
     ],
     'whitespace_after_comma_in_array' => true,
     'no_unused_imports' => true,
