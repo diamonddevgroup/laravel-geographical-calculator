@@ -1,3 +1,11 @@
+## v2.4.1 - 2025-08-27
+
+### What's Changed
+
+* Fixes trait methods returning the trait and not $this by @diamondobama in https://github.com/diamonddevgroup/laravel-geographical-calculator/pull/3
+
+**Full Changelog**: https://github.com/diamonddevgroup/laravel-geographical-calculator/compare/v2.4.0...v2.4.1
+
 ## v2.4.0 - 2025-08-26
 
 ### What's Changed
