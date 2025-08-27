@@ -2,6 +2,14 @@
 
 namespace DiamondDev\GeographicalCalculator\Traits;
 
+/**
+ * Trait PointsStorage.
+ *
+ * This trait provides methods to store and retrieve points.
+ * It includes methods to set, get, update, and clear points.
+ *
+ * @author Diamond Mubaarak
+ */
 trait PointsStorage
 {
     /**
@@ -22,7 +30,8 @@ trait PointsStorage
      * Get all points or a specific point by index.
      *
      * @param int|null $index The index of the point to retrieve. If null, all points are returned.
-     * @return array The points array or a specific point.
+     *
+     * @return array The 'points' array or a specific point.
      */
     public function getPoints(int $index = null)
     {
@@ -30,12 +39,13 @@ trait PointsStorage
     }
 
     /**
-     * Add a new point to the points array.
+     * Add a new point to the 'points' array.
      *
      * @param array $point The point to add.
-     * @return PointsStorage The current instance for method chaining.
+     *
+     * @return $this The current instance for method chaining.
      */
-    public function setPoint($point)
+    public function setPoint(array $point)
     {
         $this->points[] = $point;
 
@@ -45,9 +55,10 @@ trait PointsStorage
     /**
      * Update a specific point by index using a callback function.
      *
-     * @param int $indexAt            The index of the point to update.
+     * @param int $indexAt The index of the point to update.
      * @param callable|null $callback The callback function to apply to the point.
-     * @return PointsStorage The current instance for method chaining.
+     *
+     * @return $this The current instance for method chaining.
      */
     public function updatePoint(int $indexAt = 0, callable $callback = null)
     {
@@ -70,7 +81,8 @@ trait PointsStorage
      * Set the main point.
      *
      * @param array $point The main point to set.
-     * @return PointsStorage The current instance for method chaining.
+     *
+     * @return $this The current instance for method chaining.
      */
     public function setMainPoint(array $point)
     {
@@ -83,7 +95,8 @@ trait PointsStorage
      * Set multiple points at once.
      *
      * @param array $points The points to set.
-     * @return PointsStorage The current instance for method chaining.
+     *
+     * @return $this The current instance for method chaining.
      */
     public function setPoints(array $points)
     {
@@ -96,7 +109,8 @@ trait PointsStorage
      * Replace all existing points with a new set of points.
      *
      * @param array $points The new points to set.
-     * @return PointsStorage The current instance for method chaining.
+     *
+     * @return $this The current instance for method chaining.
      */
     public function replacePoints(array $points)
     {
@@ -108,7 +122,7 @@ trait PointsStorage
     /**
      * Clear all stored points.
      *
-     * @return PointsStorage The current instance for method chaining.
+     * @return $this The current instance for method chaining.
      */
     public function clearPoints()
     {

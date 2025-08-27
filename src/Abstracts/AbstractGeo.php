@@ -18,8 +18,9 @@ abstract class AbstractGeo
      * This method checks if a condition is set, and if so, executes the provided callback function.
      * If the condition or callback is not set, it returns the current instance.
      *
-     * @param mixed $condition        The condition to check.
+     * @param mixed $condition The condition to check.
      * @param callable|null $callback The callback function to execute if the condition is met.
+     *
      * @return AbstractGeo The current instance of the class.
      */
     public function checkIf(mixed $condition, callable $callback = null)

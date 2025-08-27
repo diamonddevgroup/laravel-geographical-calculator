@@ -13,6 +13,7 @@ class AreasTest extends OrchestraTestCase
      * Test if the center is correctly calculated for the given coordinates.
      *
      * @return void
+     *
      * @throws Exception
      */
     public function test_center()
@@ -31,6 +32,7 @@ class AreasTest extends OrchestraTestCase
      * Test if a given point is within a custom area, based on the main point and diameter.
      *
      * @return void
+     *
      * @throws Exception
      */
     public function test_if_given_point_is_in_custom_area()

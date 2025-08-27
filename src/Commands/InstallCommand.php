@@ -6,7 +6,7 @@ use Illuminate\Console\Command;
 
 class InstallCommand extends Command
 {
-    public string $packageLink = 'https://github.com/diamonddev/laravel-geographical-calculator';
+    public string $packageLink = 'https://github.com/diamonddevgroup/laravel-geographical-calculator';
 
     /**
      * The name and signature of the console command.
@@ -38,9 +38,11 @@ class InstallCommand extends Command
             if (PHP_OS_FAMILY === 'Darwin') {
                 exec("open $this->packageLink");
             }
+
             if (PHP_OS_FAMILY === 'Linux') {
                 exec("xdg-open $this->packageLink");
             }
+
             if (PHP_OS_FAMILY === 'Windows') {
                 exec("start $this->packageLink");
             }

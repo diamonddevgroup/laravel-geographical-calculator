@@ -4,6 +4,15 @@ namespace DiamondDev\GeographicalCalculator\Traits;
 
 use Exception;
 
+/**
+ * Trait Ordering.
+ *
+ * This trait provides methods to order points based on their distance from the main point.
+ * It includes methods to get the closest and farthest points
+ * and to order points using the Nearest Neighbor Algorithm.
+ *
+ * @author Karam Mustafa
+ */
 trait Ordering
 {
     /**
@@ -89,7 +98,7 @@ trait Ordering
         // Add a key to each point.
         $this->resolveKeyForEachPoint();
 
-        // Append the main point as the first point in the points array.
+        // Append the main point as the first point in the 'points' array.
         $this->replacePoints(array_merge([
             [$this->getMainPoint()[0], $this->getMainPoint()[1], 'key' => 0],
         ], $this->getPoints()));
@@ -103,10 +112,10 @@ trait Ordering
      * This method iterates through the provided points to find the closest point to the main point.
      * It uses the Nearest Neighbor Algorithm to determine the order of the points.
      *
-     * @param mixed $points     The array of points to process.
-     * @param array $result     The array to store the result. Defaults to an empty array.
+     * @param mixed $points The array of points to the process.
+     * @param array $result The array to store the result. Defaults to an empty array.
      * @param int $sizeOfPoints The total number of points. Defaults to 0.
-     * @param string $key       The key to identify each point. Defaults to 'key'.
+     * @param string $key The key to identify each point. Defaults to 'key'.
      *
      * @return mixed The ordered points based on the Nearest Neighbor Algorithm.
      *
@@ -193,7 +202,7 @@ trait Ordering
     }
 
     /**
-     * this function will go through each point, and add the key to it.
+     * this function will go through each point and add the key to it.
      *
      * @return void
      *

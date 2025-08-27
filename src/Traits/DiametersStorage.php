@@ -2,6 +2,14 @@
 
 namespace DiamondDev\GeographicalCalculator\Traits;
 
+/**
+ * Trait DiametersStorage.
+ *
+ * This trait provides methods to store and retrieve diameters.
+ * It includes methods to set and get the diameter in meters.
+ *
+ * @author Diamond Mubaarak
+ */
 trait DiametersStorage
 {
     /**
@@ -26,7 +34,8 @@ trait DiametersStorage
      * Set the diameter in meters.
      *
      * @param int $diameter The diameter in meters.
-     * @return DiametersStorage The current instance for method chaining.
+     *
+     * @return $this The current instance for method chaining.
      */
     public function setDiameter(int $diameter = 0)
     {

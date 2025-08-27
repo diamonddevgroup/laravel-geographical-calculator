@@ -5,6 +5,14 @@ namespace DiamondDev\GeographicalCalculator\Traits;
 use Exception;
 use Illuminate\Support\Collection;
 
+/**
+ * Trait Distances.
+ *
+ * This trait provides methods to calculate distances between points.
+ * It includes methods to set and get the units, calculate the distance between points,
+ *
+ * @author Diamond Mubaarak
+ */
 trait Distances
 {
     /**
@@ -36,7 +44,8 @@ trait Distances
      * Set the available units for distance calculation.
      *
      * @param array $units The units to set.
-     * @return Distances
+     *
+     * @return $this
      */
     public function setUnits(array $units)
     {
@@ -63,6 +72,7 @@ trait Distances
      * @return array|Collection
      *
      * @throws Exception
+     *
      * @author Karam Mustafa
      */
     public function getDistance(callable $callback = null)
@@ -95,9 +105,9 @@ trait Distances
     /**
      * Get the sine or cosine of the angle between two latitudes.
      *
-     * @param int|float $firstLat  The first latitude.
+     * @param int|float $firstLat The first latitude.
      * @param int|float $secondLat The second latitude.
-     * @param string $angle        The type of angle calculation ('sin' or 'cos').
+     * @param string $angle The type of angle calculation ('sin' or 'cos').
      *
      * @return float
      *
@@ -207,7 +217,7 @@ trait Distances
      *
      * @param string $unit The unit to check.
      *
-     * @return Distances
+     * @return $this
      *
      * @throws Exception
      *
@@ -226,6 +236,7 @@ trait Distances
      * Calculate the distance of each point to the main point.
      *
      * @throws Exception
+     *
      * @author Karam Mustafa
      */
     private function resolveEachDistanceToMainPoint()

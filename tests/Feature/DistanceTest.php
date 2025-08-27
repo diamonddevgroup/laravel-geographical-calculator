@@ -13,6 +13,7 @@ class DistanceTest extends OrchestraTestCase
      * Test if the distance is correctly calculated for the given coordinates.
      *
      * @return void
+     *
      * @throws Exception
      */
     public function test_distance_is_correct()

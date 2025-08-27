@@ -28,7 +28,7 @@ class GeoServiceProviders extends ServiceProvider
     }
 
     /**
-     * @desc   publish files
+     * @desc publish files
      *
      * @author Karam Mustafa
      */

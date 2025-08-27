@@ -6,6 +6,8 @@ namespace DiamondDev\GeographicalCalculator\Traits;
  * Trait Debugger.
  *
  * This trait provides a method for debugging by dumping the given variable and stopping the script execution.
+ *
+ * @author Karam Mustafa
  */
 trait Debugger
 {
